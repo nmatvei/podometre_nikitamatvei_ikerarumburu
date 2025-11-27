@@ -9,7 +9,7 @@
     android:background="#18108f">
 
     <LinearLayout
-        android:layout_width="213dp"
+        android:layout_width="250dp"
         android:layout_height="308dp"
         android:gravity="center"
         android:orientation="vertical"
