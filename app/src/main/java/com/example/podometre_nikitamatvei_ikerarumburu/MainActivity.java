@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         TextView textMetres = (TextView)findViewById(R.id.textView3);
         Button btnReiniciar = (Button)findViewById(R.id.button);
 
+        textPassos.setText("Passos comptabilitzats: 0");
+        textMetres.setText("Metres recorreguts: 0");
+
         btnReiniciar.setOnClickListener(v -> {
             numPassos = 0;
             metresRecorreguts = 0;
