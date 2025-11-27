@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -19,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainActivity extends AppCompatActivity {
 
-    int metresRecorreguts = 0;
+    double metresRecorreguts = 0;
     int numPassos = 0;
     private SensorManager sm;
     private Sensor s;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textPassos = (TextView) findViewById(R.id.textView2);
         TextView textMetres = (TextView)findViewById(R.id.textView3);
         Button btnReiniciar = (Button)findViewById(R.id.button);
+        EditText objectiuPassos = findViewById(R.id.objectiuPassos);
         textPassos.setText("Passos comptabilitzats: 0");
         textMetres.setText("Metres recorreguts: 0");
 
@@ -70,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
                 float y = e.values[1];
                 float z = e.values[2];
 
-                // Magnitud del vector d'aceleració
+                // Magnitud d'aceleració
                 float magnitud = (float) Math.sqrt(x*x + y*y + z*z);
 
-                // Temps actual
+                // Obtenim el temps actual
                 long now = System.currentTimeMillis();
 
                 // Detectem una passada
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     if (now - lastStepTime > STEP_DELAY_MS) {
                         // Sumem una passada
                         numPassos++;
-                        metresRecorreguts = numPassos;
+                        metresRecorreguts = numPassos * 0.75;
                         // Actualitzem el temps
                         lastStepTime = now;
 
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         btnReiniciar.setOnClickListener(v -> {
             numPassos = 0;
             metresRecorreguts = 0;
-
+            objectiuPassos.setText("");
             textPassos.setText("Passos comptabilitzats: " + numPassos);
             textMetres.setText("Metres recorreguts: " + metresRecorreguts);
         });
