@@ -27,7 +27,7 @@
             android:hint="@string/objectiu_passsos"
             android:inputType="number"
             android:textColor="@color/white"
-            android:textColorHint=""/>
+            android:textColorHint="@color/light_grey"/>
 
         <TextView
             android:id="@+id/textView2"
