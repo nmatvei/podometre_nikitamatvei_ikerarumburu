@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     double metresRecorreguts = 0;
     int numPassos = 0;
+    int passosObjectiusEnter = 0;
     private SensorManager sm;
     private Sensor s;
     private SensorEventListener event;
@@ -90,6 +92,21 @@ public class MainActivity extends AppCompatActivity {
 
                         textPassos.setText("Passos comptabilitzats: " + numPassos);
                         textMetres.setText("Metres recorreguts: " + metresRecorreguts);
+
+                        // Llegim els passos objectius
+                        String objetivoTexto = objectiuPassos.getText().toString();
+                        if (!objetivoTexto.isEmpty()) {
+                            try {
+                                passosObjectiusEnter = Integer.parseInt(objetivoTexto);
+                            } catch (NumberFormatException ex) {
+                                passosObjectiusEnter = 0;
+                            }
+                        }
+
+                        // Comprovar si s'ha arribat a l'objetiu
+                        if (numPassos == passosObjectiusEnter && passosObjectiusEnter > 0) {
+                            Toast.makeText(getApplicationContext(), "¡Has llegado a los pasos objetivos!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
