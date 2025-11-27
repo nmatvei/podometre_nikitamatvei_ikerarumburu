@@ -3,4 +3,5 @@
     <string name="passos_comptabilitzats">Passos comptabilitzats: </string>
     <string name="metres_recorreguts">Metres recorreguts: </string>
     <string name="restart">Reiniciar</string>
+    <string name="objectiu_passsos">Objectiu de passsos</string>
 </resources>

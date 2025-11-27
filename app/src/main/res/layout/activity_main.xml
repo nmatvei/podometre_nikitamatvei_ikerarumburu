@@ -9,24 +9,25 @@
     android:background="#18108f">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_width="213dp"
+        android:layout_height="308dp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/editTextText"
             android:layout_width="183dp"
             android:layout_height="46dp"
             android:ems="10"
-            android:textColor="@color/white"
-            android:inputType="number"
             android:gravity="center"
-            android:hint="Objectiu de passsos" />
+            android:hint="@string/objectiu_passsos"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textColorHint=""/>
 
         <TextView
             android:id="@+id/textView2"
@@ -41,21 +42,21 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="@string/metres_recorreguts"
-            android:textSize="20dp"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:text="@string/metres_recorreguts"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#108f1a"
-            android:text="@string/restart"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp"/>
+            android:paddingRight="30dp"
+            android:text="@string/restart" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
