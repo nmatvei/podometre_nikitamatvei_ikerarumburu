@@ -18,11 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <NumberPicker
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </NumberPicker>
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="183dp"
+            android:layout_height="46dp"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:inputType="text"
+            android:text="Objectiu de passsos" />
 
         <TextView
             android:id="@+id/textView2"
