@@ -6,9 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#18108f">
+    android:background="@color/blue">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/walking_animation" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="250dp"
         android:layout_height="308dp"
         android:gravity="center"
@@ -27,7 +38,8 @@
             android:hint="@string/objectiu_passsos"
             android:inputType="number"
             android:textColor="@color/white"
-            android:textColorHint="@color/light_grey"/>
+            android:textColorHint="@color/white"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -36,7 +48,7 @@
             android:text="@string/passos_comptabilitzats"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView3"
@@ -53,10 +65,11 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#108f1a"
+            android:backgroundTint="@color/dark_blue"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:text="@string/restart" />
+            android:text="@string/restart"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

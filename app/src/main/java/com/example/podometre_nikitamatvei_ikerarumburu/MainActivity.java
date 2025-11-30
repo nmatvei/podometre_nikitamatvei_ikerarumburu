@@ -1,6 +1,7 @@
 package com.example.podometre_nikitamatvei_ikerarumburu;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -8,6 +9,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +19,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class MainActivity extends AppCompatActivity {
 
+    // Variables per contar passos i metres
     double metresRecorreguts = 0;
     int numPassos = 0;
     int passosObjectiusEnter = 0;
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private static final float THRESHOLD = 11.5f;
     // Temps minim entre passades
     private static final long STEP_DELAY_MS = 500;
+
+    // Variables per l'animació
+    private ImageView walkingImage;
+    private AnimationDrawable walkingAnimation;
 
 
     @Override
@@ -55,17 +60,24 @@ public class MainActivity extends AppCompatActivity {
         textPassos.setText("Passos comptabilitzats: 0");
         textMetres.setText("Metres recorreguts: 0");
 
+        walkingImage = findViewById(R.id.imageView);
+        walkingAnimation = (AnimationDrawable) walkingImage.getDrawable();
+
         // Si el sensor no existeix tanquem la app
         if (s==null) {
             finish();
         }
 
+        // Afegim un listener al sensor
         event = new SensorEventListener() {
             @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
-            }
-
+            /**
+             * Métode que es crida quan hi ha canvis en el sensor.
+             *
+             * @param e the {@link android.hardware.SensorEvent SensorEvent}.
+             */
             @Override
             public void onSensorChanged(SensorEvent e) {
 
@@ -84,12 +96,18 @@ public class MainActivity extends AppCompatActivity {
                 if (magnitud > THRESHOLD && lastMagnitude <= THRESHOLD) {
                     // Si el temps actual menys el temps de la ultima passada es major al diley entre passades
                     if (now - lastStepTime > STEP_DELAY_MS) {
+                        if (!walkingAnimation.isRunning()) {
+                            walkingAnimation.start();
+                        }
+
                         // Sumem una passada
                         numPassos++;
                         metresRecorreguts = numPassos * 0.75;
+
                         // Actualitzem el temps
                         lastStepTime = now;
 
+                        // Actualitzem els textos de passos i metres
                         textPassos.setText("Passos comptabilitzats: " + numPassos);
                         textMetres.setText("Metres recorreguts: " + metresRecorreguts);
 
@@ -105,8 +123,15 @@ public class MainActivity extends AppCompatActivity {
 
                         // Comprovar si s'ha arribat a l'objetiu
                         if (numPassos == passosObjectiusEnter && passosObjectiusEnter > 0) {
-                            Toast.makeText(getApplicationContext(), "¡Has llegado a los pasos objetivos!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "¡Has arribat als passos objectius!", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                }
+
+                // Si el temps és menor a 1s, detenim l'animació
+                if (now - lastStepTime > 1000) {
+                    if (walkingAnimation.isRunning()) {
+                        walkingAnimation.stop();
                     }
                 }
 
@@ -117,12 +142,16 @@ public class MainActivity extends AppCompatActivity {
 
         sm.registerListener(event, s, SensorManager.SENSOR_DELAY_NORMAL);
 
+        // Afegir un listener pel botó de reiniciar
         btnReiniciar.setOnClickListener(v -> {
             numPassos = 0;
             metresRecorreguts = 0;
             objectiuPassos.setText("");
             textPassos.setText("Passos comptabilitzats: " + numPassos);
             textMetres.setText("Metres recorreguts: " + metresRecorreguts);
+            if (walkingAnimation.isRunning()) {
+                walkingAnimation.stop();
+            }
         });
 
 
